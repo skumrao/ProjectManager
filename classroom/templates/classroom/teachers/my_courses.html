@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div>
+	<a href = "{% url 'add_student' %}" class = "btn btn-light text-center" style = "float:left;width:25%;" role="button">Add Student</a>
+	<a href = "{% url 'add_reviewer' %}" class = "btn btn-light text-center" style = "float:left;width:25%" role="button">Add Reviewer</a>
+	<a href="{% url 'add_course' %}" class="btn btn-light text-center" style="float:left;width:25%;" role="button">Add Course</a>
+	<a href = "{% url 'profile' %}" class="btn btn-primary text-center" style="float:left;width:25%;" role="button">My Profile</a>
+  </div>
+  <br>
+  <div>
+    <h1 style="float:left;">My Courses </h1>
+  </div>
+  <br><br><br>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Course</th>
+		  <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in my_courses %}
+          <tr>
+            <td class="align-middle black-text">{{ course.name }}</td>
+            <td class="text-right">
+              <a href="{% url 'course_teacher_page' course.pk %}" class="btn btn-primary">Go to Course</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="4">You have not added any courses yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
