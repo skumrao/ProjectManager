@@ -107,6 +107,7 @@ class Course(models.Model):
 class Teacher(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 	courses = models.ManyToManyField(Course,  related_name='my_courses')
+        
 	def __str__(self):
 		return self.user.username
 

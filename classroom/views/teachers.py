@@ -226,8 +226,9 @@ class AssignMarks(UpdateView):
 		messages.success(self.request, 'Marks updated successfully!')
 		return redirect('view_project', project.pk)
 
-
-@method_decorator([login_required, teacher_required], name='dispatch')
+#@method_decorator([login_required, teacher_required], name='dispatch')
+@login_required
+@teacher_required
 def PostComment(request, pk):
 	project = get_object_or_404(Project, pk = pk)
 	if request.method == "POST":
@@ -241,7 +242,9 @@ def PostComment(request, pk):
 		form = CommentForm()
 	return render(request, 'classroom/teachers/post_comment.html',{'form': form})
 
-@method_decorator([login_required, teacher_required], name='dispatch')
+#@method_decorator([login_required, teacher_required], name='dispatch')
+@login_required
+@teacher_required
 def AssignReviewer(request, pk):
 	project = get_object_or_404(Project, pk=pk)
 	if request.method=="POST":

@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.forms.utils import ValidationError
 
-from classroom.models import Student, Course, Project, User, Comment, Report
+from classroom.models import Student, Course, Project, User, Comment, Report,Teacher
 
 
 def validate_email(email):
@@ -18,13 +18,15 @@ class TeacherSignUpForm(UserCreationForm):
     #contact_no=PhoneNumberField()
     class Meta(UserCreationForm.Meta):
         model = User
-        
+        #model = Teacher
         fields = ['username', 'first_name', 'last_name', 'email','phone_number' ]
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.is_teacher = True
+        #Teacher=super().save(commit=False)
+        #user.is_teacher = True
         if commit:
             user.save()
+            #Teacher.save()
         return user
 
 class ReviewerSignUpForm(UserCreationForm):
